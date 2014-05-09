@@ -1,7 +1,8 @@
 var express = require('express'),
 	morgan = require('morgan'),
 	bodyParser = require('body-parser'),
-	stylus = require('stylus');
+	stylus = require('stylus'),
+	mongoose = require('mongoose');
 
 //access development env , if not set , set it to development
 var env = process.env.NODE_ENV = process.env.NODE_ENV || 'development';
@@ -31,13 +32,34 @@ app.set('view engine','jade');
 // app.set('view engine','jade');
 // }
 
+//connecting to db
+mongoose.connect('mongodb://localhost/multivision');
+var db = mongoose.connection;
+db.on('error',console.error.bind(console,'connection error..'));
+db.once('open',function callback(){
+	console.log('multivision db opened');
+});
+
+//pulling data from database
+var messageSchema = new mongoose.Schema({message: String},{collection: 'message'});
+var Message = mongoose.model('Message', messageSchema);
+var mongoMessage;
+Message.findOne({}).exec(function(err, messageDoc) {
+	console.log('messageDoc',messageDoc);
+    mongoMessage = messageDoc.message;
+});
+
+
+
 app.get('/partials/:partialPath', function(req,res){
 	res.render('partials/'+req.params.partialPath);
 });
 
 //adding the route, * all the request, js, css, with call back fn
 app.get('*', function(req,res){
-	res.render('index');
+	res.render('index',{
+		mongoMessage: mongoMessage
+	});
 });
 
 var port = 3030;
