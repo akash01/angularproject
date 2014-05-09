@@ -31,6 +31,10 @@ app.set('view engine','jade');
 // app.set('view engine','jade');
 // }
 
+app.get('/partials/:partialPath', function(req,res){
+	res.render('partials/'+req.params.partialPath);
+});
+
 //adding the route, * all the request, js, css, with call back fn
 app.get('*', function(req,res){
 	res.render('index');
