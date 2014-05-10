@@ -36,7 +36,7 @@ app.set('view engine','jade');
 if ( env === 'development') {
 	mongoose.connect('mongodb://localhost/multivision');
 } else{
-	mongodb://akash:akash@ds035997.mongolab.com:35997/heroku_app25056525
+	mongoose.connect('mongodb://akash:akash@ds035997.mongolab.com:35997/heroku_app25056525');
 }
 
 var db = mongoose.connection;
@@ -47,6 +47,7 @@ db.once('open',function callback(){
 
 //pulling data from database note: collection name by defualt is plural
 var messageSchema = new mongoose.Schema({message: String},{collection: 'message'});
+//var messageSchema = new mongoose.Schema({message: String});
 var Message = mongoose.model('Message', messageSchema);
 var mongoMessage;
 Message.findOne({}).exec(function(err, messageDoc) {
