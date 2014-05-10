@@ -46,8 +46,8 @@ db.once('open',function callback(){
 });
 
 //pulling data from database note: collection name by defualt is plural
-var messageSchema = new mongoose.Schema({message: String},{collection: 'message'});
-//var messageSchema = new mongoose.Schema({message: String});
+//var messageSchema = new mongoose.Schema({message: String},{collection: 'message'});
+var messageSchema = new mongoose.Schema({message: String});
 var Message = mongoose.model('Message', messageSchema);
 var mongoMessage;
 Message.findOne({}).exec(function(err, messageDoc) {
