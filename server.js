@@ -36,7 +36,7 @@ app.set('view engine','jade');
 if ( env === 'development') {
 	mongoose.connect('mongodb://localhost/multivision');
 } else{
-	mongoose.connect('mongodb://localhost/multivision');
+	mongodb://akash:akash@ds035997.mongolab.com:35997/heroku_app25056525
 }
 
 var db = mongoose.connection;
@@ -45,7 +45,7 @@ db.once('open',function callback(){
 	console.log('multivision db opened');
 });
 
-//pulling data from database
+//pulling data from database note: collection name by defualt is plural
 var messageSchema = new mongoose.Schema({message: String},{collection: 'message'});
 var Message = mongoose.model('Message', messageSchema);
 var mongoMessage;
