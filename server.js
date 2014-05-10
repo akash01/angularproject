@@ -33,7 +33,12 @@ app.set('view engine','jade');
 // }
 
 //connecting to db
-mongoose.connect('mongodb://localhost/multivision');
+if ( env === 'development') {
+	mongoose.connect('mongodb://localhost/multivision');
+} else{
+	mongoose.connect('mongodb://localhost/multivision');
+}
+
 var db = mongoose.connection;
 db.on('error',console.error.bind(console,'connection error..'));
 db.once('open',function callback(){
@@ -49,8 +54,6 @@ Message.findOne({}).exec(function(err, messageDoc) {
     mongoMessage = messageDoc.message;
 });
 
-
-
 app.get('/partials/:partialPath', function(req,res){
 	res.render('partials/'+req.params.partialPath);
 });
@@ -62,6 +65,6 @@ app.get('*', function(req,res){
 	});
 });
 
-var port = 3030;
+var port = process.env.PORT || 3030;
 app.listen(port);
 console.log("listening to the port" + port + '...');
