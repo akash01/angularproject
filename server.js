@@ -14,14 +14,15 @@ function compile(str,path){
 	return stylus(str).set('filename',path);
 }
 
-app.use(express.static(__dirname+'/public'));
 app.use(morgan('dev'));
 app.use(bodyParser());
 app.use(stylus.middleware(
-	{ src: __dirname + '/public',
+	{ src: __dirname + '/public/',
 		compile: compile
 	}
 ));
+
+app.use(express.static(__dirname+'/public'));
 
 app.set('views',__dirname+'/server/views');
 app.set('view engine','jade');
@@ -45,25 +46,13 @@ db.once('open',function callback(){
 	console.log('multivision db opened');
 });
 
-//pulling data from database note: collection name by defualt is plural
-//var messageSchema = new mongoose.Schema({message: String},{collection: 'message'});
-var messageSchema = new mongoose.Schema({message: String});
-var Message = mongoose.model('Message', messageSchema);
-var mongoMessage;
-Message.findOne({}).exec(function(err, messageDoc) {
-	console.log('messageDoc',messageDoc);
-    mongoMessage = messageDoc.message;
-});
-
 app.get('/partials/:partialPath', function(req,res){
 	res.render('partials/'+req.params.partialPath);
 });
 
 //adding the route, * all the request, js, css, with call back fn
 app.get('*', function(req,res){
-	res.render('index',{
-		mongoMessage: mongoMessage
-	});
+	res.render('index');
 });
 
 var port = process.env.PORT || 3030;

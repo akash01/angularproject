@@ -1,6 +1,23 @@
-extend ../includes/layout
+extends ../includes/layout
 
 block main-content
+	.navbar.navbar-inverse.navbar-fixed-top
+		.container
+			.navbar-header
+				a.navbar-brand(href="/") Angular
+					h6 Learning Angular Js
+			.navbar-collapse.collapse
+				ul.nav.navbar-nav
+					li
+						a(href="/") Home
+
 	section.content
 		div(ng-view)
-	h2=mongoMessage
+
+	nav.navbar.navbar-default.navbar-fixed-bottom(role="navigation")
+		div.container
+			p.navbar-text.pull-right.muted.credit &copy; 2014 Angular Learning Ltd.
+
+
+
+
