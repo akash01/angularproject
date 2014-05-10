@@ -1,60 +1,51 @@
 var express = require('express'),
-	morgan = require('morgan'),
-	bodyParser = require('body-parser'),
-	stylus = require('stylus'),
-	mongoose = require('mongoose');
+	mongoose = require('mongoose'),
+	passport = require('passport'),
+	LocalStrategy = require('passport-local').Strategy;
 
 //access development env , if not set , set it to development
 var env = process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
 var app = express();
 
-//configuring stylus
-function compile(str,path){
-	return stylus(str).set('filename',path);
-}
+var config = require('./server/config/config')[env];
 
-app.use(morgan('dev'));
-app.use(bodyParser());
-app.use(stylus.middleware(
-	{ src: __dirname + '/public/',
-		compile: compile
+require('./server/config/express')(app,config);
+
+require('./server/config/mongoose')(config);
+
+var User = mongoose.model('User');
+passport.use(new LocalStrategy(
+	function(username,password,done){
+		console.log('username',username);
+		User.findOne({userName:username}).exec(function(err,user){
+			if(user) {
+				return done(null, user);
+			} else {
+				return done(null, false);
+			}
+
+		});
 	}
 ));
 
-app.use(express.static(__dirname+'/public'));
-
-app.set('views',__dirname+'/server/views');
-app.set('view engine','jade');
-
-//configuring the express app
-// if ('development' == env ) {
-// app.set('views',__dirname+'/server/views');
-// app.set('view engine','jade');
-// }
-
-//connecting to db
-if ( env === 'development') {
-	mongoose.connect('mongodb://localhost/multivision');
-} else{
-	mongoose.connect('mongodb://akash:akash@ds035997.mongolab.com:35997/heroku_app25056525');
-}
-
-var db = mongoose.connection;
-db.on('error',console.error.bind(console,'connection error..'));
-db.once('open',function callback(){
-	console.log('multivision db opened');
+passport.serializeUser(function(user,done){
+	if(user){
+		done(null,user._id);
+	}
 });
 
-app.get('/partials/:partialPath', function(req,res){
-	res.render('partials/'+req.params.partialPath);
+passport.deserializeUser(function(id,done){
+	User.findOne({_id:id}).exec(function(err,user){
+		if(user) {
+			return done(null,user);
+		} else {
+			return done(null, false);
+		}
+	});
 });
 
-//adding the route, * all the request, js, css, with call back fn
-app.get('*', function(req,res){
-	res.render('index');
-});
+require('./server/config/routes')(app);
 
-var port = process.env.PORT || 3030;
-app.listen(port);
-console.log("listening to the port" + port + '...');
+app.listen(config.port);
+console.log("Listening to the port" + config.port + '...');
