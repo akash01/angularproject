@@ -30,6 +30,8 @@ module.exports = function() {
         return done(null, false);
       }
     })
-  })
+  });
 
-}
+};
+
+
