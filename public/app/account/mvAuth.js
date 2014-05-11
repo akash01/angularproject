@@ -5,7 +5,7 @@ angular.module('app').factory('mvAuth', function($http, mvIdentity, $q, mvUser) 
       $http.post('/login', {username:username, password:password}).then(function(response) {
         if(response.data.success) {
           var user = new mvUser();
-          angular.extend(user, response.data.user);
+          angular.extend(user, response.data.user); //will add isadmin function from mvuser file
           mvIdentity.currentUser = user;
           dfd.resolve(true);
         } else {

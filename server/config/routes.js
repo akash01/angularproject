@@ -3,11 +3,11 @@ var auth = require('./auth'),
   User = mongoose.model('User');
 
 module.exports = function(app) {
-
+  //auth.requiresRole('admin'), --checks for admin to show the list of users
   app.get('/api/users', auth.requiresRole('admin'), function(req, res) {
     User.find({}).exec(function(err, collection) {
       res.send(collection);
-    })
+    });
   });
 
   app.get('/partials/*', function(req, res) {

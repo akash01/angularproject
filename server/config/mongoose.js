@@ -28,14 +28,14 @@ module.exports = function(config) {
     if(collection.length === 0) {
       var salt, hash;
       salt = createSalt();
-      hash = hashPwd(salt, 'joe');
-      User.create({firstName:'Joe',lastName:'Eames',userName:'joe', salt: salt, hashed_pwd: hash, roles: ['admin']});
-      salt = createSalt();
       hash = hashPwd(salt, 'john');
-      User.create({firstName:'John',lastName:'Papa',userName:'john', salt: salt, hashed_pwd: hash, roles: []});
+      User.create({firstName:'John',lastName:'Kal',userName:'john', salt: salt, hashed_pwd: hash, roles: ['admin']});
       salt = createSalt();
-      hash = hashPwd(salt, 'dan');
-      User.create({firstName:'Dan',lastName:'Wahlin',userName:'dan', salt: salt, hashed_pwd: hash});
+      hash = hashPwd(salt, 'dawn');
+      User.create({firstName:'Dawn',lastName:'Fox',userName:'dawn', salt: salt, hashed_pwd: hash, roles: []});
+      salt = createSalt();
+      hash = hashPwd(salt, 'bill');
+      User.create({firstName:'Bill',lastName:'Gates',userName:'bill', salt: salt, hashed_pwd: hash});
     }
   })
 }
