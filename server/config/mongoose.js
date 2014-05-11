@@ -26,7 +26,7 @@ module.exports = function(config) {
 
   User.find({}).exec(function(err, collection) {
     if(collection.length === 0) {
-      var salt, hash;
+      var salt,hash;
       salt = createSalt();
       hash = hashPwd(salt, 'john');
       User.create({firstName:'John',lastName:'Kal',userName:'john', salt: salt, hashed_pwd: hash, roles: ['admin']});
