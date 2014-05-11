@@ -15,6 +15,9 @@ angular.module('app').config(function($routeProvider, $locationProvider) {
     	controller: 'mvUserListCtrl',
 			//route resolve tell what to do when user ends up in authorize page
 			resolve: routeRoleChecks.admin
+    })
+    .when('/signup', { templateUrl: '/partials/account/signup',
+      controller: 'mvSignupCtrl'
     });
 
 });
