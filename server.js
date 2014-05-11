@@ -29,6 +29,12 @@ passport.use(new LocalStrategy(
 	}
 ));
 
+//see if the request has user object
+app.use(function(req,res,next){
+	console.log(req.user);
+	next();
+});
+
 passport.serializeUser(function(user,done){
 	if(user){
 		done(null,user._id);
