@@ -26,6 +26,6 @@ The following objectives were achieved while developing this project.The time al
 So roughly i have spent 48 hours in this project.
 
 #### Project Links:
-* [Heroku App Link](http://angularnodemongo.herokuapp.com/, "meandemo")
-* [GitHub App Link](https://github.com/akash01/angularproject, "Github")
+* [Heroku App Link](http://angularnodemongo.herokuapp.com/ "meandemo")
+* [GitHub App Link](https://github.com/akash01/angularproject "Github")
 * [Mean Stack](http://mean.io/#!/ "Mean")
