@@ -5,6 +5,13 @@ The idea of this project is a user can register, login , edit their profile , fi
 
 The following objectives were achieved while developing this project.The time allocated is time to familarise the angularjs, nodejs, mongodb, jade, stylus, bootstrap. I had basic understanding of mongodb and angularjs before starting this project.
 
+#### Installation:
+* Clone the repo.
+* cd angularproject
+* bower install
+* npm install
+* nodemon server.js or node server.js
+
 #### Objective:
 * Learn in detail Angularjs
 * Learn Nodejs backend with Angularjs
