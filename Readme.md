@@ -12,25 +12,6 @@ The following objectives were achieved while developing this project.The time al
 * npm install
 * nodemon server.js or node server.js
 
-#### Objective:
-* Learn in detail Angularjs
-* Learn Nodejs backend with Angularjs
-* Integrate MongoDb with Nodejs + Angularjs
-* Familiarise with Mean io stack
-* Familiarise with stylus and jade + bootstrap
-
-#### Project:
-* Make Barebone with nodejs, angularjs, mongodb (3+5+2) = 10
-* Heroku Setup and deploy for barebone (1)
-* Basic layout UI with Bootstrap and Stylus (4+4+3) = 11
-* Authentication and Authorization (6+4) = 10
-* Signup (6)
-* Profile (4)
-* Course List (4)
-* Filter and Sort (1)
-* Sort (1)
-
-So roughly i have spent 48 hours in this project.
 
 #### Project Links:
 * [Heroku App Link](http://angularnodemongo.herokuapp.com/ "meandemo")
